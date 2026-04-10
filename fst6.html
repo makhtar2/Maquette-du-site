@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FST UCAD - Faculté des Sciences et Technologies | Université Cheikh Anta Diop</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f9fe;
+            color: #0f172a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Palette UCAD : bleu principal #3b93d0 */
+        :root {
+            --ucad-blue: #3b93d0;
+            --ucad-dark: #1a5a8a;
+            --ucad-light: #6bb5e8;
+            --accent: #3b93d0;
+            --accent-dark: #1a5a8a;
+            --gold: #f2b13c;
+            --gray-bg: #f1f5f9;
+            --white: #ffffff;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+            --border-radius: 1.25rem;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: white;
+            border-bottom: 1px solid #e2edf2;
+            padding: 0.75rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        .top-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+       /* ✅ Image logo */
+        .logo-img {
+            height: 45px;   /* ajuste ici selon ton besoin */
+            width: auto;
+        }
+
+        /* ✅ Séparateur vertical */
+        .separator {
+            width: 2px;
+            height: 40px;
+            background-color: #d1d9e6;
+        }
+
+        /* (optionnel) améliorer alignement global */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* remplace 0.75rem si tu veux plus d’espace */
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--ucad-blue) 0%, var(--ucad-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+        }
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--ucad-blue);
+        }
+        .logo-text span {
+            font-size: 0.65rem;
+            color: #5b6e8c;
+            display: block;
+        }
+
+        .search-area {
+            flex: 1;
+            max-width: 190px;
+            margin: 0 1rem;
+        }
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 60px;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #e2edf2;
+            transition: all 0.2s;
+        }
+        .search-wrapper:focus-within {
+            border-color: var(--ucad-blue);
+            box-shadow: 0 0 0 3px rgba(59,147,208,0.1);
+            background: white;
+        }
+        .search-wrapper input {
+            border: none;
+            background: transparent;
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .search-wrapper button {
+            background: var(--ucad-blue);
+            border: none;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .search-wrapper button:hover {
+            background: var(--ucad-dark);
+        }
+
+        .portal-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .portal-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--ucad-dark);
+            transition: 0.2s;
+            border: 1px solid #e2edf2;
+        }
+        .portal-btn i { color: var(--ucad-blue); }
+        .portal-btn:hover { background: var(--ucad-blue); color: white; border-color: var(--ucad-blue); }
+        .portal-btn:hover i { color: white; }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid #eef3f8;
+            position: sticky;
+            top: 70px;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item > a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e293b;
+            padding: 0.9rem 1rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .nav-item > a:hover {
+            color: var(--ucad-blue);
+            background: #f1f5f9;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 48px;
+            left: 0;
+            background: white;
+            min-width: 260px;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+            border: 1px solid #eef2f6;
+            padding: 0.5rem 0;
+            display: none;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            color: #334155;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .dropdown-menu a:hover {
+            background: #f1f5f9;
+            color: var(--ucad-blue);
+            padding-left: 1.5rem;
+        }
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu > .dropdown-menu {
+            left: 100%;
+            top: 0;
+            display: none;
+        }
+        .dropdown-submenu > .dropdown-menu.show-sub {
+            display: block;
+        }
+        .has-arrow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--ucad-blue);
+        }
+
+        /* ========== SLIDER AUTOMATIQUE ========== */
+        .hero-slider {
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .slide-text {
+            flex: 1;
+        }
+        .slide-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .slide-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        .slide-stats {
+            flex: 1;
+            display: flex;
+            gap: 2rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            justify-content: center;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: var(--gold);
+            width: 30px;
+            border-radius: 10px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.2s;
+        }
+        .slider-btn:hover {
+            background: var(--ucad-blue);
+        }
+        .btn-prev { left: 20px; }
+        .btn-next { right: 20px; }
+
+        /* Sections */
+        .section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--gold);
+            padding-left: 1rem;
+            color: var(--ucad-dark);
+        }
+
+        /* Partenaires carrousel */
+        .partners-carousel {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 1rem;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            position: relative;
+        }
+        .partners-track {
+            display: flex;
+            gap: 3rem;
+            animation: scrollPartners 20s linear infinite;
+            width: fit-content;
+        }
+        .partners-track:hover {
+            animation-play-state: paused;
+        }
+        .partner-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+            padding: 1rem;
+        }
+        .partner-item i {
+            font-size: 2.5rem;
+            color: var(--ucad-blue);
+        }
+        .partner-item span {
+            font-weight: 600;
+            color: #334155;
+        }
+        @keyframes scrollPartners {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- Nouvelle Section Présentation --- */
+        .presentation-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+            background: white;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #eef2f6;
+            margin-bottom: 3rem;
+        }
+        .presentation-text p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        .presentation-text .highlight {
+            color: var(--ucad-dark);
+            font-weight: 700;
+        }
+        .mission-box {
+            background: #f8fafc;
+            padding: 1.8rem;
+            border-radius: 1.5rem;
+            border-left: 5px solid var(--ucad-blue);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+        .mission-box h3 {
+            color: var(--ucad-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .mission-box h3 i { color: var(--gold); }
+        
+        .pres-image-wrapper {
+            position: relative;
+            border-radius: 2rem;
+            overflow: visible;
+        }
+        .pres-image-wrapper .main-img {
+            width: 100%;
+            height: 400px;
+            border-radius: 2rem;
+            display: block;
+            object-fit: cover;
+            box-shadow: var(--shadow-md);
+            border: 4px solid white;
+        }
+        .lmd-badge {
+            position: absolute;
+            bottom: -25px;
+            left: -25px;
+            background: var(--ucad-blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1.2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            z-index: 10;
+            animation: floatPres 3s ease-in-out infinite;
+        }
+        .lmd-badge i { font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .lmd-badge span { display: block; font-weight: 800; font-size: 1.3rem; }
+        .lmd-badge small { font-size: 0.75rem; opacity: 0.9; }
+
+        /* Stats Cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .stat-card-new {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #eef2f6;
+            transition: all 0.3s ease;
+        }
+        .stat-card-new:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--ucad-blue);
+        }
+        .stat-card-new .icon {
+            width: 55px;
+            height: 55px;
+            background: #f1f5f9;
+            color: var(--ucad-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto 1.2rem;
+        }
+        .stat-card-new:hover .icon {
+            background: var(--ucad-blue);
+            color: white;
+        }
+        .stat-card-new .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--ucad-dark);
+            margin-bottom: 0.3rem;
+        }
+        .stat-card-new .label {
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        @keyframes floatPres {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 992px) {
+            .presentation-container { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .stats-row { grid-template-columns: 1fr; }
+        }
+        /* --- Nouveau Mot du Doyen --- */
+        .dean-card {
+            background: white;
+            border-radius: 2.5rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #eef2f6;
+        }
+        .dean-sidebar {
+            background: linear-gradient(135deg, var(--ucad-dark) 0%, var(--ucad-blue) 100%);
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .dean-avatar-wrapper {
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+        .dean-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .dean-sidebar h4 { font-size: 1.2rem; margin-bottom: 0.2rem; font-weight: 700; }
+        .dean-sidebar span { font-size: 0.8rem; opacity: 0.9; }
+
+        .dean-body {
+            padding: 3.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .dean-body::before {
+            content: '\f10d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: #f1f5f9;
+            z-index: 0;
+        }
+        .dean-body h3 {
+            font-size: 1.8rem;
+            color: var(--ucad-dark);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .dean-body p {
+            font-size: 1.1rem;
+            color: #475569;
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+        .dean-footer {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .dean-card { grid-template-columns: 1fr; }
+            .dean-body { padding: 2.5rem 2rem; }
+        }
+        /* --- Accès Rapide & Actualités PRO --- */
+        .quick-grid-pro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        .quick-card-pro {
+            background: white;
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            display: block;
+        }
+        .quick-card-pro:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--ucad-blue);
+        }
+        .quick-card-pro i {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ucad-blue), var(--ucad-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .quick-card-pro h3 {
+            color: var(--ucad-dark);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .quick-card-pro p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .actu-grid-pro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        .actu-card-pro {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+        }
+        .actu-card-pro:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        .actu-image-pro {
+            height: 220px;
+            background: #f1f5f9;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .actu-image-pro img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .actu-card-pro:hover .actu-image-pro img {
+            transform: scale(1.1);
+        }
+        .actu-image-pro i {
+            font-size: 4rem;
+            color: rgba(59, 147, 208, 0.2);
+        }
+        .actu-tag-pro {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: var(--gold);
+            color: var(--ucad-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .actu-body-pro {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .actu-date-pro {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .actu-body-pro h3 {
+            font-size: 1.3rem;
+            color: var(--ucad-dark);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        .actu-body-pro p {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .actu-link-pro {
+            margin-top: auto;
+            color: var(--ucad-blue);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s;
+        }
+        .actu-link-pro:hover {
+            gap: 12px;
+        }
+
+        /* --- Chiffres Section PRO --- */
+        .chiffres-container-pro {
+            background: linear-gradient(135deg, var(--ucad-dark) 0%, var(--ucad-blue) 100%);
+            border-radius: 3rem;
+            padding: 4rem 2rem;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .chiffres-container-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+        }
+        .chiffre-item-pro {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .chiffre-item-pro .num {
+            font-size: 3.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+        .chiffre-item-pro .label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .chiffres-container-pro { flex-direction: column; gap: 2rem; }
+            .chiffre-item-pro .num { font-size: 2.5rem; }
+        }
+        /* --- Modern Institutional Footer CSS --- */
+        .footer-modern {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 6rem 2rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            border-radius: 4rem 4rem 0 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .footer-newsletter {
+            max-width: 1400px;
+            margin: -4rem auto 4rem;
+            background: linear-gradient(135deg, var(--ucad-blue) 0%, var(--ucad-dark) 100%);
+            padding: 3rem;
+            border-radius: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 10;
+        }
+        .newsletter-text h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .newsletter-text p { opacity: 0.9; font-size: 1rem; }
+        .newsletter-form { display: flex; gap: 1rem; flex: 0.8; max-width: 500px; }
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+        .newsletter-form button {
+            background: var(--gold);
+            color: var(--ucad-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .newsletter-form button:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        .footer-grid-modern {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+        }
+        .footer-brand .logo-f {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .footer-brand p { color: #94a3b8; line-height: 1.7; font-size: 0.95rem; margin-bottom: 2rem; }
+        .footer-socials { display: flex; gap: 12px; }
+        .footer-socials a {
+            width: 42px;
+            height: 42px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-socials a:hover {
+            background: var(--ucad-blue);
+            border-color: var(--ucad-blue);
+            transform: translateY(-5px);
+        }
+
+        .footer-col-m h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col-m h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+        }
+        .footer-nav-m { list-style: none; }
+        .footer-nav-m li { margin-bottom: 1rem; }
+        .footer-nav-m a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            display: inline-block;
+            position: relative;
+        }
+        .footer-nav-m a:hover { color: white; transform: translateX(5px); }
+        .footer-nav-m a::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: var(--gold);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .footer-nav-m a:hover::before { opacity: 1; margin-right: 12px; }
+
+        .footer-contact-m .c-info { display: flex; gap: 15px; margin-bottom: 1.5rem; color: #94a3b8; font-size: 0.95rem; }
+        .footer-contact-m i { color: var(--ucad-blue); font-size: 1.1rem; margin-top: 3px; }
+
+        .footer-bottom-m {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        .footer-bottom-links { display: flex; gap: 2rem; }
+        .footer-bottom-links a { color: inherit; text-decoration: none; transition: 0.2s; }
+        .footer-bottom-links a:hover { color: white; }
+
+        @media (max-width: 1200px) {
+            .footer-grid-modern { grid-template-columns: repeat(3, 1fr); }
+            .footer-newsletter { flex-direction: column; text-align: center; gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .footer-grid-modern { grid-template-columns: repeat(2, 1fr); }
+            .footer-modern { border-radius: 2rem 2rem 0 0; padding-top: 4rem; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid-modern { grid-template-columns: 1fr; }
+            .footer-bottom-m { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+        .btn-primary {
+            background: var(--ucad-blue);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .btn-gold {
+            background: var(--gold);
+            color: var(--ucad-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-container">
+        <div class="logo-area">
+            <img src="logo Ucad\LOGOtext.png" alt="Logo UCAD" class="logo-img">
+                <div class="separator"></div>
+            <!--div class="logo-icon"><i class="fas fa-flask"></i></div-->
+            <div class="logo-text">
+                <h1>FST</h1>
+                <span>Faculté des Sciences et Techniques</span>
+            </div>
+        </div>
+        <div class="portal-buttons">
+            <a href="#" class="portal-btn"><i class="fas fa-user-graduate"></i> Espace Étudiant</a>
+            <a href="#" class="portal-btn"><i class="fas fa-user-tie"></i> Espace Personnel</a>
+            <a href="#" class="portal-btn"><i class="fas fa-chalkboard-user"></i> Plateforme FAD</a>
+        </div>
+        <div class="search-area">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher...">
+                <button>OK</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="nav-links">
+            <li class="nav-item"><a href="#"><!--i class="fas fa-home"></i--> Accueil</a></li>
+            <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-university"></i--> Faculté <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu"><a href="#">Mot du Doyen</a><a href="#">Mission & Vision</a><a href="#">Historique</a><a href="#">Organigramme</a><a href="#">Administration</a><a href="#">Faculté en chiffres</a><a href="#">Services</a></div>
+            </li>
+            <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-building"></i--> Établissements <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Départements <i class="fas fa-chevron-right"></i></a>
+                        <div class="dropdown-menu"><a href="#">Biologie Animale</a><a href="#">Biologie Végétale</a><a href="#">Chimie</a><a href="#">Géologie</a><a href="#">Mathématiques-Informatique</a><a href="#">Physique</a></div>
+                    </div>
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Instituts <i class="fas fa-chevron-right"></i></a>
+                        <div class="dropdown-menu"><a href="#">Institut des Sciences de l'Environnement (ISE)</a><a href="#">Institut Supérieur d'Agriculture (ISAE)</a><a href="#">Institut Mathématiques Souleymane FALL</a></div>
+                    </div>
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Écoles Doctorales <i class="fas fa-chevron-right"></i></a>
+                        <div class="dropdown-menu"><a href="#">Liste des écoles doctorales</a><a href="#">Domaines de recherche</a><a href="#">Encadrement doctoral</a></div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-graduation-cap"></i--> Formation <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Licences <i class="fas fa-chevron-right"></i> </a>
+                        <div class="dropdown-menu"><a href="#">Licence MPI</a><a href="#">Licence PCSM</a><a href="#">Licence BCGS / SVT</a><a href="#">Licence Informatique</a><a href="#">Licence TDSI</a> <a href="#">Licence Professionnelles</a></div>
+                  
+                    </div>   
+                    
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Masters <i class="fas fa-chevron-right"></i></a>
+                        <div class="dropdown-menu"><a href="#">Masters Scientifiques et Techniques</a><a href="#">Masters professionnels</a></div>
+                
+                    </div>
+        
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Doctorat </a>
+                        
+                    </div>
+                    <div class="dropdown-submenu"><a href="#" class="submenu-parent has-arrow">Condition d’accès <i class="fas fa-chevron-right"></i> </a>
+                        <div class="dropdown-menu"><a href="#">Conditions d'admissions</a><a href="#">Inscription/Réinscription</a><a href="#">Conditions de passage aux examens</a></div>
+                  
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-users"></i--> Vie Étudiante <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu"><a href="#">Bibliothèque</a><a href="#">Amicale</a><a href="#">Guide étudiant</a><a href="#">Stages</a><a href="#">Clubs</a></div>
+            </li>
+             <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-handshake"></i--> Recherche <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu"><a href="#">Laboratoires</a><a href="#">Projets</a><a href="#">Publications</a></div>
+            </li>
+            <li class="nav-item"><a href="#" class="menu-parent"><!--i class="fas fa-handshake"></i--> Relations <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu"><a href="#">Partenariats</a><a href="#">Relations entreprises</a><a href="#">Offres de stage</a></div>
+            </li>
+            <li class="nav-item"><a href="#"><!--i class="fas fa-newspaper"></i--> Actualités</a></li>
+           
+            <li class="nav-item"><a href="#"><!--i class="fas fa-envelope"></i--> Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- SLIDER AUTOMATIQUE -->
+<div class="hero-slider">
+    <div class="slider-container" id="sliderContainer">
+        <div class="slide active" style="background: linear-gradient(120deg, #0a2f3f, #1a5a8a);">
+            <div class="slide-content">
+                <div class="slide-text"><h2>Innovation, Recherche & Excellence</h2><p>Bienvenue à la Faculté des Sciences et Technologies de l'UCAD.</p><a href="#" class="btn-primary">Admissions Doctorat</a></div>
+                <div class="slide-stats"><div><div class="number" style="font-size:2rem;font-weight:800;">12 000+</div><div>Étudiants</div></div><div><div style="font-size:2rem;font-weight:800;">200+</div><div>Enseignants</div></div><div><div style="font-size:2rem;font-weight:800;">8</div><div>Écoles doctorales</div></div></div>
+            </div>
+        </div>
+        <div class="slide" style="background: linear-gradient(120deg, #1a5a8a, #2c7ab8);">
+            <div class="slide-content">
+                <div class="slide-text"><h2>Formation d'Excellence</h2><p>Des licences aux doctorats, une offre de formation complète et reconnue.</p><a href="#" class="btn-primary">Découvrir les formations</a></div>
+                <div class="slide-stats"><div><div style="font-size:2rem;font-weight:800;">25+</div><div>Licences</div></div><div><div style="font-size:2rem;font-weight:800;">30+</div><div>Masters</div></div><div><div style="font-size:2rem;font-weight:800;">3</div><div>Écoles Doctorales</div></div></div>
+            </div>
+        </div>
+        <div class="slide" style="background: linear-gradient(120deg, #0f4f66, #3b93d0);">
+            <div class="slide-content">
+                <div class="slide-text"><h2>Recherche & Innovation</h2><p>Des laboratoires de pointe au service du développement durable.</p><a href="#" class="btn-primary">Nos laboratoires</a></div>
+                <div class="slide-stats"><div><div style="font-size:2rem;font-weight:800;">15+</div><div>Laboratoires</div></div><div><div style="font-size:2rem;font-weight:800;">200+</div><div>Publications/an</div></div><div><div style="font-size:2rem;font-weight:800;">50+</div><div>Partenaires</div></div></div>
+            </div>
+        </div>
+        <button class="slider-btn btn-prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn btn-next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+        <div class="slider-dots" id="sliderDots"></div>
+    </div>
+</div>
+
+<!-- Présentation de la Faculté (Design Moderne) -->
+<div class="section">
+    <h2 class="section-title">Présentation de la Faculté</h2>
+    
+    <div class="presentation-container">
+        <div class="presentation-text">
+            <p>
+                La <span class="highlight">Faculté des Sciences de l’Université Cheikh Anta Diop</span> de Dakar (UCAD) est un établissement d’enseignement supérieur d'excellence. Créée en <span class="highlight">1957</span>, elle a évolué pour devenir la <strong>Faculté des Sciences et Techniques (FST)</strong> en 1990, marquant son engagement vers l'innovation.
+            </p>
+            <p>
+                Elle a pour mission principale la formation de haut niveau, la recherche scientifique de pointe et le service à la communauté dans les domaines des sciences fondamentales et appliquées.
+            </p>
+            
+            <div class="mission-box">
+                <h3><i class="fa-solid fa-bullseye"></i> Notre Mission</h3>
+                <p style="margin-bottom: 0;">Former les leaders scientifiques de demain en offrant un cadre d'apprentissage moderne, axé sur l'employabilité et l'excellence académique dans le système LMD.</p>
+            </div>
+            
+            <a href="#" class="btn-primary" style="margin-top: 2rem;">En savoir plus <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+        
+        <div class="pres-image-wrapper">
+            <img src="fst_image.jpeg" alt="Faculté des Sciences et Techniques" class="main-img">
+            <div class="lmd-badge">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>LMD</span>
+                <small>Licence - Master - Doctorat</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards Row -->
+    <div class="stats-row">
+        <div class="stat-card-new">
+            <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="number">13 000+</div>
+            <div class="label">Étudiants formés</div>
+        </div>
+        <div class="stat-card-new">
+            <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="number">200+</div>
+            <div class="label">Enseignants-Chercheurs</div>
+        </div>
+        <div class="stat-card-new">
+            <div class="icon"><i class="fa-solid fa-microscope"></i></div>
+            <div class="number">6</div>
+            <div class="label">Départements</div>
+        </div>
+        <div class="stat-card-new">
+            <div class="icon"><i class="fa-solid fa-building-columns"></i></div>
+            <div class="number">3</div>
+            <div class="label">Instituts de formation</div>
+        </div>
+    </div>
+</div>
+
+<!-- Mot du Doyen (Design Premium) -->
+<div class="section">
+    <div class="dean-card">
+        <div class="dean-sidebar">
+            <div class="dean-avatar-wrapper">
+                <img src="ismaila.diouf.jpeg" alt="Pr. Ismaila DIOUF">
+            </div>
+            <h4>Pr. Ismaila DIOUF</h4>
+            <span>Doyen de la FST UCAD</span>
+        </div>
+        
+        <div class="dean-body">
+            <h3>Mot du Doyen</h3>
+            <p>
+                "C'est avec une grande fierté que je préside aux destinées de la Faculté des Sciences et Technologies. Notre ambition est de former des scientifiques de haut niveau, porteurs d'innovations et acteurs du changement. Nous misons sur l'excellence académique, la recherche appliquée et l'ouverture internationale. Chaque étudiant trouvera à la FST un cadre propice à son épanouissement intellectuel et professionnel."
+            </p>
+            
+            <div class="dean-footer">
+                <div class="signature-line" style="font-family: 'Georgia', serif; font-style: italic; color: var(--ucad-blue); font-weight: 700; font-size: 1.2rem;">
+                    Pr. Ismaila DIOUF
+                </div>
+                <a href="#" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Lire le message complet</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Accès rapide (Design Pro) -->
+<div class="section">
+    <h2 class="section-title">Accès rapide</h2>
+    <div class="quick-grid-pro">
+        <a href="#" class="quick-card-pro">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>Formation</h3>
+            <p>Licences, Masters, Doctorat et formations professionnelles.</p>
+        </a>
+        <a href="#" class="quick-card-pro">
+            <i class="fas fa-building"></i>
+            <h3>Établissements</h3>
+            <p>Découvrez nos 6 départements et nos instituts de formation.</p>
+        </a>
+        <a href="#" class="quick-card-pro">
+            <i class="fas fa-microscope"></i>
+            <h3>Recherche</h3>
+            <p>Laboratoires, projets de recherche et écoles doctorales.</p>
+        </a>
+        <a href="#" class="quick-card-pro">
+            <i class="fas fa-pen-alt"></i>
+            <h3>Inscriptions</h3>
+            <p>Procédures d'admission et inscriptions en ligne (LMD).</p>
+        </a>
+    </div>
+</div>
+
+<!-- Faculté en chiffres (Design Pro) -->
+<div class="section">
+    <div class="chiffres-container-pro">
+        <div class="chiffre-item-pro">
+            <span class="num">13 000+</span>
+            <span class="label">Étudiants</span>
+        </div>
+        <div class="chiffre-item-pro">
+            <span class="num">200+</span>
+            <span class="label">Chercheurs</span>
+        </div>
+        <div class="chiffre-item-pro">
+            <span class="num">6</span>
+            <span class="label">Départements</span>
+        </div>
+        <div class="chiffre-item-pro">
+            <span class="num">3</span>
+            <span class="label">Instituts</span>
+        </div>
+    </div>
+</div>
+
+<!-- Actualités & Communiqués (Design Pro) -->
+<div class="section">
+    <h2 class="section-title">Actualités & Communiqués</h2>
+    <div class="actu-grid-pro">
+        <!-- Article 1 -->
+        <article class="actu-card-pro">
+            <div class="actu-image-pro">
+                <span class="actu-tag-pro">Conférence</span>
+                <img src="https://images.unsplash.com/photo-1591084728795-1149f32d9866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Conférence biodiversité">
+            </div>
+            <div class="actu-body-pro">
+                <div class="actu-date-pro"><i class="far fa-calendar-alt"></i> 12 Avril 2024</div>
+                <h3>Conférence sur la biodiversité et le développement durable</h3>
+                <p>Réseau d'études sur le développement et la gestion des ressources naturelles en Afrique de l'Ouest.</p>
+                <a href="#" class="actu-link-pro">Lire la suite <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+        <!-- Article 2 -->
+        <article class="actu-card-pro">
+            <div class="actu-image-pro">
+                <span class="actu-tag-pro">Recherche</span>
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Recherche Innovation">
+            </div>
+            <div class="actu-body-pro">
+                <div class="actu-date-pro"><i class="far fa-calendar-alt"></i> 10 Avril 2024</div>
+                <h3>Soutenance de Thèse : Innovation en Physique des Matériaux</h3>
+                <p>Présentation des travaux de recherche sur les nouvelles cellules photovoltaïques à haut rendement.</p>
+                <a href="#" class="actu-link-pro">Lire la suite <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+        <!-- Article 3 -->
+        <article class="actu-card-pro">
+            <div class="actu-image-pro">
+                <span class="actu-tag-pro">Admission</span>
+                <img src="https://images.unsplash.com/photo-1523050335102-c325090813fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Admission Masters">
+            </div>
+            <div class="actu-body-pro">
+                <div class="actu-date-pro"><i class="far fa-calendar-alt"></i> 05 Avril 2024</div>
+                <h3>Appel à Candidature : Masters Professionnels 2024-2025</h3>
+                <p>Ouverture des registres pour les spécialisations en Informatique et Gestion de l'Environnement.</p>
+                <a href="#" class="actu-link-pro">Lire la suite <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+    </div>
+</div>
+
+<!-- Partenaires carrousel automatique -->
+<div class="section">
+    <h2 class="section-title">Partenariats stratégiques</h2>
+    <div class="partners-carousel">
+        <div class="partners-track" id="partnersTrack">
+            <div class="partner-item"><i class="fas fa-university"></i><span>IRD</span></div>
+            <div class="partner-item"><i class="fas fa-globe"></i><span>AUF</span></div>
+            <div class="partner-item"><i class="fas fa-flask"></i><span>Institut Pasteur</span></div>
+            <div class="partner-item"><i class="fas fa-chart-line"></i><span>Campus France</span></div>
+            <div class="partner-item"><i class="fas fa-handshake"></i><span>DAAD</span></div>
+            <div class="partner-item"><i class="fas fa-microchip"></i><span>CEA</span></div>
+            <div class="partner-item"><i class="fas fa-tree"></i><span>UICN</span></div>
+            <!-- Duplication pour l'effet infini -->
+            <div class="partner-item"><i class="fas fa-university"></i><span>IRD</span></div>
+            <div class="partner-item"><i class="fas fa-globe"></i><span>AUF</span></div>
+            <div class="partner-item"><i class="fas fa-flask"></i><span>Institut Pasteur</span></div>
+            <div class="partner-item"><i class="fas fa-chart-line"></i><span>Campus France</span></div>
+            <div class="partner-item"><i class="fas fa-handshake"></i><span>DAAD</span></div>
+            <div class="partner-item"><i class="fas fa-microchip"></i><span>CEA</span></div>
+            <div class="partner-item"><i class="fas fa-tree"></i><span>UICN</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Galerie -->
+<div class="section">
+    <h2 class="section-title">Galerie</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div style="flex:1; min-width:180px; background: linear-gradient(135deg, var(--ucad-light), var(--ucad-blue)); border-radius:1rem; height:140px; display:flex; align-items:center; justify-content:center; color:white;"><i class="fas fa-camera fa-2x"></i> Cérémonie diplômes</div>
+        <div style="flex:1; min-width:180px; background: linear-gradient(135deg, var(--ucad-blue), var(--ucad-dark)); border-radius:1rem; height:140px; display:flex; align-items:center; justify-content:center; color:white;"><i class="fas fa-tree fa-2x"></i> Sortie terrain</div>
+        <div style="flex:1; min-width:180px; background: linear-gradient(135deg, var(--ucad-dark), #0f4f66); border-radius:1rem; height:140px; display:flex; align-items:center; justify-content:center; color:white;"><i class="fas fa-microscope fa-2x"></i> TP laboratoire</div>
+    </div>
+</div>
+
+<!-- Relations entreprises -->
+<div class="section">
+    <div style="background: linear-gradient(115deg, var(--ucad-dark) 0%, var(--ucad-blue) 100%); border-radius: 2rem; padding: 2.5rem; color: white; text-align: center;">
+        <h3 style="font-size: 1.8rem;">Relations entreprises & opportunités</h3>
+        <p style="margin: 1rem 0;">Partenariats, offres de stage et incubateur de startups — la FST connecte les talents.</p>
+        <a href="#" class="btn-gold">Découvrir les offres <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<!-- Footer (Design Moderne & Institutionnel) -->
+<footer class="footer-modern">
+    <!-- Newsletter Section -->
+    <div class="footer-newsletter">
+        <div class="newsletter-text">
+            <h3>Restez informé</h3>
+            <p>Inscrivez-vous à notre newsletter pour recevoir les dernières actualités académiques.</p>
+        </div>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Votre adresse email...">
+            <button type="submit">S'abonner</button>
+        </form>
+    </div>
+
+    <div class="footer-grid-modern">
+        <!-- Brand & Mission -->
+        <div class="footer-brand">
+            <div class="logo-f">
+                <div class="logo-icon" style="width:45px;height:45px;font-size:1.3rem;"><i class="fas fa-flask"></i></div>
+                <h3 style="color:white; font-size: 1.5rem; font-weight: 800;">FST UCAD</h3>
+            </div>
+            <p>
+                Pôle d'excellence de l'Université Cheikh Anta Diop de Dakar, la FST s'engage pour une formation scientifique de haut niveau et une recherche innovante au service du développement durable.
+            </p>
+            <div class="footer-socials">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Académique -->
+        <div class="footer-col-m">
+            <h4>Académique</h4>
+            <ul class="footer-nav-m">
+                <li><a href="#">Offre de formation</a></li>
+                <li><a href="#">Calendrier universitaire</a></li>
+                <li><a href="#">Départements</a></li>
+                <li><a href="#">Instituts rattachés</a></li>
+                <li><a href="#">Écoles doctorales</a></li>
+            </ul>
+        </div>
+
+        <!-- Recherche -->
+        <div class="footer-col-m">
+            <h4>Recherche</h4>
+            <ul class="footer-nav-m">
+                <li><a href="#">Laboratoires</a></li>
+                <li><a href="#">Unités de recherche</a></li>
+                <li><a href="#">Publications</a></li>
+                <li><a href="#">Coopération inter.</a></li>
+                <li><a href="#">Projets en cours</a></li>
+            </ul>
+        </div>
+
+        <!-- Vie de Campus -->
+        <div class="footer-col-m">
+            <h4>Vie de Campus</h4>
+            <ul class="footer-nav-m">
+                <li><a href="#">Portail Étudiant</a></li>
+                <li><a href="#">Bibliothèque</a></li>
+                <li><a href="#">Amicale des étudiants</a></li>
+                <li><a href="#">Clubs & Activités</a></li>
+                <li><a href="#">Infrastructures</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact & Accès -->
+        <div class="footer-col-m footer-contact-m">
+            <h4>Contact & Accès</h4>
+            <div class="c-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Avenue Cheikh Anta Diop, BP 5005 Dakar-Fann, Sénégal</span>
+            </div>
+            <div class="c-info">
+                <i class="fas fa-phone-alt"></i>
+                <span>+221 33 825 10 10</span>
+            </div>
+            <div class="c-info">
+                <i class="fas fa-envelope"></i>
+                <span>contact.fst@ucad.edu.sn</span>
+            </div>
+            <a href="#" class="btn-primary" style="margin-top: 1rem; width: 100%; text-align: center; font-size: 0.85rem;">Plan du campus</a>
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-m">
+        <p>&copy; 2024 Faculté des Sciences et Techniques - UCAD. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Accessibilité</a>
+            <a href="#" style="color:var(--gold); font-weight: 700;"><i class="fas fa-arrow-up"></i> Haut de page</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // SLIDER AUTOMATIQUE
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const dotsContainer = document.getElementById('sliderDots');
+    let currentIndex = 0;
+    let autoInterval;
+
+    function createDots() {
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots() {
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function goToSlide(index) {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex].classList.add('active');
+        updateDots();
+        resetAutoPlay();
+    }
+
+    function nextSlide() { goToSlide(currentIndex + 1); }
+    function prevSlide() { goToSlide(currentIndex - 1); }
+
+    function resetAutoPlay() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => nextSlide(), 5000);
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    createDots();
+    resetAutoPlay();
+
+    // Menu click indépendant
+    document.querySelectorAll('.menu-parent').forEach(parent => {
+        parent.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = this.closest('.nav-item').querySelector(':scope > .dropdown-menu');
+            if (dropdown) {
+                document.querySelectorAll('.nav-item > .dropdown-menu.show').forEach(open => { if (open !== dropdown) open.classList.remove('show'); });
+                dropdown.classList.toggle('show');
+            }
+        });
+    });
+    document.querySelectorAll('.submenu-parent').forEach(sub => {
+        sub.addEventListener('click', function(e) {
+            e.preventDefault();
+            const subDropdown = this.closest('.dropdown-submenu').querySelector(':scope > .dropdown-menu');
+            if (subDropdown) {
+                const parent = this.closest('.dropdown-menu');
+                if (parent) parent.querySelectorAll('.dropdown-submenu > .dropdown-menu.show-sub').forEach(open => { if (open !== subDropdown) open.classList.remove('show-sub'); });
+                subDropdown.classList.toggle('show-sub');
+            }
+        });
+    });
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.addEventListener('click', e => e.stopPropagation()));
+    document.getElementById('mobile-menu')?.addEventListener('click', () => document.getElementById('nav-links').classList.toggle('active'));
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-item')) {
+            document.querySelectorAll('.dropdown-menu.show').forEach(m => m.classList.remove('show'));
+            document.querySelectorAll('.dropdown-menu.show-sub').forEach(m => m.classList.remove('show-sub'));
+        }
+    });
+</script>
+</body>
+</html>
