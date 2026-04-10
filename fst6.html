@@ -7,7 +7,7 @@
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -554,133 +554,211 @@
         @media (max-width: 576px) {
             .stats-row { grid-template-columns: 1fr; }
         }
-        /* --- Nouveau Mot du Doyen --- */
-        .dean-card {
+        /* --- Nouveau Mot du Doyen (Portrait Editorial) --- */
+        .dean-section-editorial {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
             background: white;
             border-radius: 2.5rem;
-            display: grid;
-            grid-template-columns: 320px 1fr;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid #eef2f6;
-        }
-        .dean-sidebar {
-            background: linear-gradient(135deg, var(--ucad-dark) 0%, var(--ucad-blue) 100%);
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-        .dean-avatar-wrapper {
-            width: 150px;
-            height: 150px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 4px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: var(--shadow-md);
+            border: 1px solid #eef2f6;
+            min-height: 600px;
         }
-        .dean-avatar-wrapper img {
+
+        .dean-image-container {
+            position: relative;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .dean-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
-        .dean-sidebar h4 { font-size: 1.2rem; margin-bottom: 0.2rem; font-weight: 700; }
-        .dean-sidebar span { font-size: 0.8rem; opacity: 0.9; }
 
-        .dean-body {
-            padding: 3.5rem;
-            position: relative;
+        .dean-overlay-glass {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .dean-overlay-glass h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .dean-overlay-glass span {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .dean-content-editorial {
+            padding: 4rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-        .dean-body::before {
-            content: '\f10d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 1.5rem;
-            left: 2rem;
-            font-size: 4rem;
-            color: #f1f5f9;
-            z-index: 0;
-        }
-        .dean-body h3 {
-            font-size: 1.8rem;
-            color: var(--ucad-dark);
-            margin-bottom: 1.2rem;
-            position: relative;
-            z-index: 1;
-        }
-        .dean-body p {
-            font-size: 1.1rem;
-            color: #475569;
-            line-height: 1.8;
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 1.5rem;
-        }
-        .dean-footer {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 1.5rem;
+            background: #ffffff;
         }
 
-        @media (max-width: 992px) {
-            .dean-card { grid-template-columns: 1fr; }
-            .dean-body { padding: 2.5rem 2rem; }
+        .dean-content-editorial .quote-icon {
+            font-size: 3rem;
+            color: var(--ucad-blue);
+            opacity: 0.15;
+            margin-bottom: 0.5rem;
         }
-        /* --- Accès Rapide & Actualités PRO --- */
-        .quick-grid-pro {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+        .dean-content-editorial h3 {
+            font-size: 2.4rem;
+            color: var(--ucad-dark);
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+        }
+
+        .dean-message {
+            font-size: 1.15rem;
+            color: #334155;
+            line-height: 1.9;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 2.5rem;
+        }
+
+        .dean-signature-block {
+            margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .handwritten-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--ucad-dark);
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .dean-section-editorial { grid-template-columns: 1fr; }
+            .dean-content-editorial { padding: 3rem 2rem; }
+            .dean-image-container { min-height: 450px; }
+        }
+        /* --- Carousel des Formations (Accès Rapide) --- */
+        .formations-wrapper {
+            position: relative;
+            padding: 0 40px;
+        }
+        .formations-carousel {
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+        .formations-track {
+            display: flex;
             gap: 2rem;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .quick-card-pro {
+        .formation-card {
+            flex: 0 0 calc(33.333% - 1.35rem);
+            min-width: 300px;
             background: white;
             border-radius: 2rem;
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #f1f5f9;
             box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
-            display: block;
+            color: inherit;
         }
-        .quick-card-pro:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-lg);
+        .formation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
             border-color: var(--ucad-blue);
         }
-        .quick-card-pro i {
-            font-size: 2.8rem;
+        .formation-card i {
+            font-size: 3rem;
             margin-bottom: 1.5rem;
-            display: inline-block;
             background: linear-gradient(135deg, var(--ucad-blue), var(--ucad-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .quick-card-pro h3 {
+        .formation-card h3 {
             color: var(--ucad-dark);
             font-size: 1.4rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
-        .quick-card-pro p {
+        .formation-card p {
             color: #64748b;
             font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .formation-card .btn-outline {
+            margin-top: auto;
+            color: var(--ucad-blue);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 1px solid #e2edf2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--ucad-blue);
+            box-shadow: var(--shadow-sm);
+            z-index: 10;
+            transition: 0.3s;
+        }
+        .carousel-nav:hover {
+            background: var(--ucad-blue);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        .nav-left { left: -10px; }
+        .nav-right { right: -10px; }
+
+        @media (max-width: 992px) {
+            .formation-card { flex: 0 0 calc(50% - 1rem); }
+        }
+        @media (max-width: 600px) {
+            .formation-card { flex: 0 0 100%; }
+            .formations-wrapper { padding: 0; }
+            .nav-left, .nav-right { display: none; }
         }
 
         .actu-grid-pro {
@@ -1168,28 +1246,27 @@
     </div>
 </div>
 
-<!-- Mot du Doyen (Design Premium) -->
+<!-- Mot du Doyen (Portrait Editorial) -->
 <div class="section">
-    <div class="dean-card">
-        <div class="dean-sidebar">
-            <div class="dean-avatar-wrapper">
-                <img src="ismaila.diouf.jpeg" alt="Pr. Ismaila DIOUF">
+    <div class="dean-section-editorial">
+        <div class="dean-image-container">
+            <img src="ismaila.diouf.jpeg" alt="Pr. Ismaila DIOUF">
+            <div class="dean-overlay-glass">
+                <h4>Pr. Ismaila DIOUF</h4>
+                <span>Doyen de la Faculté des Sciences et Techniques</span>
             </div>
-            <h4>Pr. Ismaila DIOUF</h4>
-            <span>Doyen de la FST UCAD</span>
         </div>
         
-        <div class="dean-body">
-            <h3>Mot du Doyen</h3>
-            <p>
+        <div class="dean-content-editorial">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <h3>Le Mot du Doyen</h3>
+            <div class="dean-message">
                 "C'est avec une grande fierté que je préside aux destinées de la Faculté des Sciences et Technologies. Notre ambition est de former des scientifiques de haut niveau, porteurs d'innovations et acteurs du changement. Nous misons sur l'excellence académique, la recherche appliquée et l'ouverture internationale. Chaque étudiant trouvera à la FST un cadre propice à son épanouissement intellectuel et professionnel."
-            </p>
+            </div>
             
-            <div class="dean-footer">
-                <div class="signature-line" style="font-family: 'Georgia', serif; font-style: italic; color: var(--ucad-blue); font-weight: 700; font-size: 1.2rem;">
-                    Pr. Ismaila DIOUF
-                </div>
-                <a href="#" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Lire le message complet</a>
+            <div class="dean-signature-block">
+                <div class="handwritten-signature">Pr. Ismaila DIOUF</div>
+                <a href="#" class="btn-primary">Lire le message complet <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
             </div>
         </div>
     </div>
