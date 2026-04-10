@@ -663,102 +663,222 @@
             .dean-content-editorial { padding: 3rem 2rem; }
             .dean-image-container { min-height: 450px; }
         }
-        /* --- Carousel des Formations (Accès Rapide) --- */
-        .formations-wrapper {
-            position: relative;
-            padding: 0 40px;
+        /* --- Accès Rapide Institutionnel (Elite Grid) --- */
+        .quick-access-elite {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
-        .formations-carousel {
-            overflow: hidden;
-            padding: 2rem 0;
-        }
-        .formations-track {
-            display: flex;
-            gap: 2rem;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .formation-card {
-            flex: 0 0 calc(33.333% - 1.35rem);
-            min-width: 300px;
+        .elite-card {
             background: white;
-            border-radius: 2rem;
+            border-radius: 1.5rem;
             padding: 2.5rem 2rem;
-            text-align: center;
-            border: 1px solid #f1f5f9;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s ease;
+            text-align: left;
+            border: 1px solid #e2edf2;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
-        .formation-card:hover {
-            transform: translateY(-10px);
+        .elite-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.3s ease;
+        }
+        .elite-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow-md);
             border-color: var(--ucad-blue);
         }
-        .formation-card i {
-            font-size: 3rem;
+        .elite-card:hover::before {
+            height: 100%;
+        }
+        .elite-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: #f8fafc;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--ucad-blue), var(--ucad-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--ucad-blue);
+            font-size: 1.8rem;
+            transition: 0.3s;
         }
-        .formation-card h3 {
+        .elite-card:hover .elite-icon-wrapper {
+            background: var(--ucad-blue);
+            color: white;
+            transform: scale(1.1);
+        }
+        .elite-card h3 {
             color: var(--ucad-dark);
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
+            font-size: 1.25rem;
             font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-family: 'Inter', sans-serif;
         }
-        .formation-card p {
+        .elite-card p {
             color: #64748b;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        .formation-card .btn-outline {
+        .elite-link {
             margin-top: auto;
+            font-size: 0.85rem;
+            font-weight: 800;
             color: var(--ucad-blue);
-            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
-        
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
+        .elite-link i {
+            transition: transform 0.3s ease;
+        }
+        .elite-card:hover .elite-link i {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1100px) {
+            .quick-access-elite { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .quick-access-elite { grid-template-columns: 1fr; }
+        }
+
+        /* --- Section Admission & Conditions (Design Tabs Modern) --- */
+        .admission-tabs-container {
             background: white;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
             border: 1px solid #e2edf2;
+        }
+        .admission-tabs-nav {
+            display: flex;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2edf2;
+            padding: 0 2rem;
+        }
+        .tab-btn {
+            padding: 1.5rem 2rem;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .tab-btn.active {
+            color: var(--ucad-blue);
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--ucad-blue);
+        }
+        .tab-btn:hover { color: var(--ucad-blue); }
+
+        .tab-content {
+            padding: 4rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content.active { display: block; }
+
+        .admission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        .admission-requirements h4 {
+            font-size: 1.4rem;
+            color: var(--ucad-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admission-requirements h4 i { color: var(--gold); }
+        .req-list { list-style: none; }
+        .req-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .req-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-size: 0.9rem;
+        }
+
+        .admission-steps {
+            background: #f1f5f9;
+            padding: 2.5rem;
+            border-radius: 2rem;
+        }
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--ucad-blue);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            color: var(--ucad-blue);
-            box-shadow: var(--shadow-sm);
-            z-index: 10;
-            transition: 0.3s;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(59, 147, 208, 0.3);
         }
-        .carousel-nav:hover {
-            background: var(--ucad-blue);
-            color: white;
-            box-shadow: var(--shadow-md);
+        .step-info h5 {
+            font-size: 1.1rem;
+            color: var(--ucad-dark);
+            margin-bottom: 0.4rem;
         }
-        .nav-left { left: -10px; }
-        .nav-right { right: -10px; }
+        .step-info p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         @media (max-width: 992px) {
-            .formation-card { flex: 0 0 calc(50% - 1rem); }
-        }
-        @media (max-width: 600px) {
-            .formation-card { flex: 0 0 100%; }
-            .formations-wrapper { padding: 0; }
-            .nav-left, .nav-right { display: none; }
+            .admission-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .tab-content { padding: 2.5rem 1.5rem; }
+            .admission-tabs-nav { overflow-x: auto; white-space: nowrap; }
         }
 
         .actu-grid-pro {
@@ -1273,30 +1393,217 @@
 </div>
 
 
-<!-- Accès rapide (Design Pro) -->
+<!-- Accès Rapide Institutionnel (Elite Grid) -->
 <div class="section">
-    <h2 class="section-title">Accès rapide</h2>
-    <div class="quick-grid-pro">
-        <a href="#" class="quick-card-pro">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>Formation</h3>
-            <p>Licences, Masters, Doctorat et formations professionnelles.</p>
-        </a>
-        <a href="#" class="quick-card-pro">
-            <i class="fas fa-building"></i>
-            <h3>Établissements</h3>
-            <p>Découvrez nos 6 départements et nos instituts de formation.</p>
-        </a>
-        <a href="#" class="quick-card-pro">
-            <i class="fas fa-microscope"></i>
-            <h3>Recherche</h3>
-            <p>Laboratoires, projets de recherche et écoles doctorales.</p>
-        </a>
-        <a href="#" class="quick-card-pro">
-            <i class="fas fa-pen-alt"></i>
+    <h2 class="section-title">Portail de Services</h2>
+    <div class="quick-access-elite">
+        <!-- Inscriptions -->
+        <a href="#" class="elite-card">
+            <div class="elite-icon-wrapper">
+                <i class="fas fa-file-signature"></i>
+            </div>
             <h3>Inscriptions</h3>
-            <p>Procédures d'admission et inscriptions en ligne (LMD).</p>
+            <p>Guide complet pour les admissions en Licence, Master et Doctorat (LMD).</p>
+            <span class="elite-link">Accéder au guide <i class="fas fa-arrow-right"></i></span>
         </a>
+        <!-- Offre de Formation -->
+        <a href="#" class="elite-card">
+            <div class="elite-icon-wrapper">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Offre de Formation</h3>
+            <p>Explorez nos 6 départements et nos programmes scientifiques d'excellence.</p>
+            <span class="elite-link">Voir les cursus <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <!-- Recherche & Labos -->
+        <a href="#" class="elite-card">
+            <div class="elite-icon-wrapper">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <h3>Recherche</h3>
+            <p>Laboratoires, projets innovants et publications de nos enseignants-chercheurs.</p>
+            <span class="elite-link">Nos laboratoires <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <!-- Espace Etudiant -->
+        <a href="#" class="elite-card">
+            <div class="elite-icon-wrapper">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>Portail Étudiant</h3>
+            <p>Accédez à vos notes, emplois du temps et ressources pédagogiques en ligne.</p>
+            <span class="elite-link">Se connecter <i class="fas fa-arrow-right"></i></span>
+        </a>
+    </div>
+</div>
+
+<!-- Section Admission & Conditions (Design Elite) -->
+<div class="section">
+    <h2 class="section-title">Admission & Inscriptions</h2>
+    
+    <div class="admission-tabs-container">
+        <!-- Navigation des Onglets -->
+        <div class="admission-tabs-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'licenceTab')">Licence</button>
+            <button class="tab-btn" onclick="openTab(event, 'masterTab')">Master</button>
+            <button class="tab-btn" onclick="openTab(event, 'doctoratTab')">Doctorat</button>
+            <button class="tab-btn" onclick="openTab(event, 'etrangerTab')">Étudiants Étrangers</button>
+        </div>
+
+        <!-- Contenu Licence -->
+        <div id="licenceTab" class="tab-content active">
+            <div class="admission-grid">
+                <div class="admission-requirements">
+                    <h4><i class="fas fa-list-check"></i> Conditions d'Admissibilité</h4>
+                    <ul class="req-list">
+                        <li>Être titulaire d'un Baccalauréat Scientifique (S1, S2, S3, S4, S5) ou technique (T1, T2).</li>
+                        <li>Sélection via la plateforme nationale "Campusen".</li>
+                        <li>Dossier complet déposé au service de la scolarité après orientation.</li>
+                        <li>Paiement des droits d'inscription (25 000 FCFA pour les nationaux).</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="margin-top: 1.5rem;">Consulter le calendrier <i class="fas fa-calendar-days" style="margin-left:8px;"></i></a>
+                </div>
+                <div class="admission-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <h5>Orientation Campusen</h5>
+                            <p>Validez votre choix sur la plateforme nationale après les résultats du Bac.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <h5>Visite Médicale</h5>
+                            <p>Effectuez votre visite obligatoire au centre médico-social de l'UCAD.</p>
+                        </div>
+                    </div>
+                    <div class="step-item" style="margin-bottom:0;">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <h5>Inscription Administrative</h5>
+                            <p>Finalisez votre dossier et récupérez votre carte d'étudiant à la FST.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu Master -->
+        <div id="masterTab" class="tab-content">
+            <div class="admission-grid">
+                <div class="admission-requirements">
+                    <h4><i class="fas fa-file-export"></i> Critères de Sélection</h4>
+                    <ul class="req-list">
+                        <li>Titulaire d'une Licence dans un domaine compatible.</li>
+                        <li>Sélection sur dossier et/ou entretien selon le département.</li>
+                        <li>Moyenne minimale requise de 12/20 sur l'ensemble du cycle Licence.</li>
+                        <li>Lettre de motivation et projet professionnel solide.</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="margin-top: 1.5rem;">Déposer ma candidature <i class="fas fa-upload" style="margin-left:8px;"></i></a>
+                </div>
+                <div class="admission-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <h5>Dépôt de Dossier</h5>
+                            <p>Soumission en ligne sur la plateforme dédiée de la FST.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <h5>Commission Pédagogique</h5>
+                            <p>Examen de votre parcours académique par les responsables de Master.</p>
+                        </div>
+                    </div>
+                    <div class="step-item" style="margin-bottom:0;">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <h5>Résultats & Inscription</h5>
+                            <p>Publication des listes et formalités de paiement des droits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu Doctorat -->
+        <div id="doctoratTab" class="tab-content">
+            <div class="admission-grid">
+                <div class="admission-requirements">
+                    <h4><i class="fas fa-microscope"></i> Inscription en Thèse</h4>
+                    <ul class="req-list">
+                        <li>Être titulaire d'un Master de Recherche avec mention Bien minimum.</li>
+                        <li>Avoir un Directeur de Thèse rattaché à une école doctorale de la FST.</li>
+                        <li>Présenter un projet de recherche validé par le laboratoire d'accueil.</li>
+                        <li>S'engager à respecter la charte des thèses de l'UCAD.</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="margin-top: 1.5rem;">Écoles Doctorales <i class="fas fa-building-columns" style="margin-left:8px;"></i></a>
+                </div>
+                <div class="admission-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <h5>Accord de Principe</h5>
+                            <p>Obtenir l'accord écrit d'un professeur habilité à diriger des recherches.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <h5>Dossier Scientifique</h5>
+                            <p>Validation du sujet et du protocole par le comité scientifique.</p>
+                        </div>
+                    </div>
+                    <div class="step-item" style="margin-bottom:0;">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <h5>Admission ED</h5>
+                            <p>Inscription définitive auprès de l'École Doctorale choisie.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu Étudiants Étrangers -->
+        <div id="etrangerTab" class="tab-content">
+            <div class="admission-grid">
+                <div class="admission-requirements">
+                    <h4><i class="fas fa-earth-africa"></i> Procédures Internationales</h4>
+                    <ul class="req-list">
+                        <li>Demande d'autorisation d'inscription adressée au Rectorat.</li>
+                        <li>Équivalence des diplômes étrangers (Bac ou Licence).</li>
+                        <li>Passeport valide et visa d'étude selon le pays d'origine.</li>
+                        <li>Assurance rapatriement et couverture maladie obligatoire.</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="margin-top: 1.5rem;">Guide Mobilité <i class="fas fa-plane" style="margin-left:8px;"></i></a>
+                </div>
+                <div class="admission-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <h5>Équivalence</h5>
+                            <p>Obtention de l'attestation de niveau auprès de l'UCAD.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <h5>Autorisation Rectorale</h5>
+                            <p>Réception de la lettre officielle autorisant l'inscription.</p>
+                        </div>
+                    </div>
+                    <div class="step-item" style="margin-bottom:0;">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <h5>Arrivée à Dakar</h5>
+                            <p>Finalisation du processus physique au service de la scolarité.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1586,6 +1893,23 @@
             document.querySelectorAll('.dropdown-menu.show-sub').forEach(m => m.classList.remove('show-sub'));
         }
     });
+
+    // Fonctions pour les Onglets Admission
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.className += " active";
+    }
 </script>
 </body>
 </html>
